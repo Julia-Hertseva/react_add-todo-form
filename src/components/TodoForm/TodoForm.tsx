@@ -1,4 +1,3 @@
-import users from '../../api/users';
 import { Todo, User } from '../../types/types';
 import { ChangeEvent, useState } from 'react';
 
@@ -7,7 +6,7 @@ type Props = {
   users: User[];
 };
 
-export const TodoForm = ({ onSubmit }: Props) => {
+export const TodoForm = ({ onSubmit, users }: Props) => {
   const [title, setTitle] = useState('');
   const [hasTitleError, setHasTitleError] = useState(false);
 

@@ -1,9 +1,10 @@
-import { Todo } from '../../types/types';
+import users from '../../api/users';
+import { Todo, User } from '../../types/types';
 import { ChangeEvent, useState } from 'react';
-import usersFromServer from '../../api/users';
 
 type Props = {
   onSubmit: (todoData: Omit<Todo, 'id' | 'completed' | 'user'>) => void;
+  users: User[];
 };
 
 export const TodoForm = ({ onSubmit }: Props) => {
@@ -33,7 +34,7 @@ export const TodoForm = ({ onSubmit }: Props) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!title) {
+    if (!title.trim()) {
       setHasTitleError(true);
     }
 
@@ -41,7 +42,7 @@ export const TodoForm = ({ onSubmit }: Props) => {
       setHasUserError(true);
     }
 
-    if (!title || !selectedUser) {
+    if (!title.trim() || !selectedUser) {
       return;
     }
 
@@ -80,7 +81,7 @@ export const TodoForm = ({ onSubmit }: Props) => {
           <option value="0" disabled>
             Choose a user
           </option>
-          {usersFromServer.map(user => (
+          {users.map(user => (
             <option key={user.id} value={user.id}>
               {user.name}
             </option>

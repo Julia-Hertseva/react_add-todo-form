@@ -28,7 +28,7 @@ export const App: React.FC = () => {
 
       const newId = maxId + 1;
       const userForNewTodo = usersFromServer.find(
-        u => u.id === todoData.userId,
+        newUser => newUser.id === todoData.userId,
       );
 
       const newTodo: Todo = {
@@ -46,7 +46,7 @@ export const App: React.FC = () => {
     <div className="App">
       <h1>Add todo form</h1>
 
-      <TodoForm onSubmit={addTodo} />
+      <TodoForm onSubmit={addTodo} users={usersFromServer} />
 
       <TodoList todos={todos} />
     </div>
